@@ -1,0 +1,68 @@
+-- CREAR TABLA
+CREATE TABLE users (
+    name VARCHAR(10) UNIQUE
+);
+-- INSERTAR DATOS A UNA TABLA CON UNA SOLOA COLUMNA
+
+INSERT INTO users(name)
+    VALUES ('Jose');
+
+-- ACTUALIZAR UN DATO DE UNA TABLA
+
+UPDATE users SET
+name = 'Alberto'
+WHERE name = 'Jose'
+
+-- VER REGISTROS DE UNA TABLA
+SELECT * FROM users;
+-- VER REGISTROS DE UNA TABLA HASTA 2 COLUMNAS
+SELECT * FROM users LIMIT 2;
+-- VER REGISTROS DE UNA TABLA HASTA 2 COLUMNAS, SALTANDOSE LAS PRIMERAS 2
+SELECT * FROM users LIMIT 2 OFFSET 2;
+-- VER REGISTRO 
+SELECT * FROM users WHERE name='Jordan'
+-- BUSCAR USUARIOS QUE TENGAN UNA J MAYUSCULA AL COMIENZO
+SELECT * FROM users WHERE name LIKE 'J%';
+
+
+-- ELIMINAR REGISTROS DE UNA TABLA
+
+DELETE FROM users WHERE name LIKE 'J%';
+DELETE FROM users WHERE name LIKE 'Jordan';
+DELETE FROM users WHERE name LIKE '_ordan%';
+DELETE FROM users;
+
+-- ELIMINAR TABLA COMPLETA
+DROP TABLE users;
+-- ELIMINAR LOS REGISTROS Y REINICIA LOS ID
+DROP TABLE users;
+
+-- BUSCAR LOS DATOS ID, NAME PERO EN MAYUSCULAS
+SELECT id, UPPER(name) FROM users;
+SELECT id, UPPER(name) as Mayusculas, name FROM users;
+SELECT id, UPPER(name) as Mayusculas, LOWER(name) as Minusculas, name FROM users;
+SELECT id, LENGTH(name) as Cantidad de letras, name FROM users;
+
+-- BUSCAR DONDE ESTA LA SEPARACION
+SELECT name, SUBSTRING(name, 0,5),
+POSITION('E') FROM users;
+-- BUSCAMOS EL FIRST/LAST NAME DESDE LA POSICION
+SELECT name, SUBSTRING(name, 0,5),
+POSITION(' ' in name),
+SUBSTRING(name, 0,POSITION(' ' in name)) as first_name,
+SUBSTRING(name, 0,POSITION(' ' in name)+1)  as last_name
+FROM users;
+-- FUNCIONA IGUAL QUE EL ANTERIOR PERO NO SE RECOMIENDA
+SELECT name, SUBSTRING(name, 0,5),
+POSITION(' ' in name),
+SUBSTRING(name, 0,POSITION(' ' in name)) as first_name,
+TRIM(SUBSTRING(name, 0,POSITION(' ' in name))  as last_name)
+FROM users;
+
+
+-- AGREGAR FIRST/LAST NAME A LA TABLA
+UPDATE users SET
+first_name = SUBSTRING(name, 0,POSITION(' ' in name)),
+last_name = SUBSTRING(name, 0,POSITION(' ' in name));
+
+SELECT * FROM users;
