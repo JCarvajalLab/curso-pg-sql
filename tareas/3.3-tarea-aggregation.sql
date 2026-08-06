@@ -65,4 +65,5 @@ ORDER BY country ASC, first_name ASC, last_name ASC
 
 SELECT COUNT(*) AS Total, country FROM users
 WHERE country IN ('Mexico', 'Honduras', 'Costa Rica')
-ORDER BY country ASC, first_name ASC, last_name ASC
+GROUP BY country
+ORDER BY country ASC
