@@ -34,6 +34,10 @@ CREATE TABLE userDual(
 SELECT gen_random_uuid()
 -- Habilita funciones UUID adicionales en PostgreSQL si aun no estan instaladas.
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+-- Eimina la funcion UUID
+DROP EXTENSION IF EXISTS "uuid-ossp";
+
+
 SELECT gen_random_uuid(), uuid_generate_v1()
 
 --
